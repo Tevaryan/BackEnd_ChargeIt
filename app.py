@@ -2,6 +2,11 @@ import os
 import config
 from flask import Flask
 from models.base_model import db
+from flask_jwt_extended import (
+    JWTManager, jwt_required, create_access_token,
+    get_jwt_identity
+)
+
 
 web_dir = os.path.join(os.path.dirname(
     os.path.abspath(__file__)), 'instagram_web')
@@ -13,6 +18,8 @@ if os.getenv('FLASK_ENV') == 'production':
 else:
     app.config.from_object("config.DevelopmentConfig")
 
+app.config["JWT_SECRET_KEY"] = 'Charge_it'
+jwt = JWTManager(app)
 
 @app.before_request
 def before_request():

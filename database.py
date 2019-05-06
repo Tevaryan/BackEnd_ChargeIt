@@ -26,7 +26,6 @@ def return_db():
 
     else:
         from playhouse.pool import PooledPostgresqlExtDatabase
-
         return PooledPostgresqlExtDatabase(
             db_config['database'],
             max_connections=os.getenv('DB_POOL', 5),
